@@ -68,8 +68,11 @@ void packetToAudio(const uint8_t *data, int length) {
         // Add some processing for better audio representation
         // Every 4th byte, add a slightly modified duplicate for texture
         if (i % 4 == 0 && sampleCount < AUDIO_BUFFER_SIZE) {
-            int16_t modSample = sample + (random(-1000, 1000));
-            audioBuffer[sampleCount++] = modSample;
+            int32_t modSample = (int32_t)sample + random(-1000, 1000);
+            // Clamp to int16_t range to prevent overflow
+            if (modSample > 32767) modSample = 32767;
+            if (modSample < -32768) modSample = -32768;
+            audioBuffer[sampleCount++] = (int16_t)modSample;
         }
     }
     

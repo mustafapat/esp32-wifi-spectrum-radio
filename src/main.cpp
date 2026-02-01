@@ -96,7 +96,9 @@ void loop() {
     if (currentTime - lastDisplayUpdate >= DISPLAY_UPDATE_INTERVAL) {
         uint32_t pps = getPacketsPerSecond();
         int8_t rssi = getAverageRSSI();
-        int frequency = CHANNEL_FREQ[currentChannel];
+        // Bounds check before array access
+        int frequency = (currentChannel >= 0 && currentChannel < 14) ? 
+                        CHANNEL_FREQ[currentChannel] : 0;
         
         updateDisplay(currentChannel, frequency, pps, rssi, audioMuted);
         lastDisplayUpdate = currentTime;

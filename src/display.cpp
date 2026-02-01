@@ -68,8 +68,7 @@ void updateDisplay(uint8_t channel, int frequency, uint32_t packetsPerSec, int8_
     display.print(F("Sinyal: "));
     
     // Convert RSSI to bar level (0-10)
-    // RSSI typically ranges from -100 (weak) to -30 (strong)
-    int barLevel = map(rssi, -100, -30, 0, 10);
+    int barLevel = map(rssi, RSSI_MIN, RSSI_MAX, 0, 10);
     if (barLevel < 0) barLevel = 0;
     if (barLevel > 10) barLevel = 10;
     

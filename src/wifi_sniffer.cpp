@@ -95,7 +95,8 @@ void resetPacketCount() {
 
 int8_t getAverageRSSI() {
     if (rssiCount == 0) return -100;
-    int8_t avgRSSI = rssiSum / rssiCount;
+    // Proper rounding for integer division
+    int8_t avgRSSI = (rssiSum + rssiCount/2) / rssiCount;
     
     // Reset for next period
     rssiSum = 0;

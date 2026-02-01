@@ -59,4 +59,8 @@ const int CHANNEL_FREQ[14] = {
 // ===== Encoder Configuration =====
 #define ENCODER_DEBOUNCE_DELAY 50    // ms
 
+// ===== RSSI Configuration =====
+#define RSSI_MIN -100  // dBm - Weakest signal
+#define RSSI_MAX -30   // dBm - Strongest signal
+
 #endif // CONFIG_H
